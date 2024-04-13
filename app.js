@@ -9,6 +9,8 @@ import { Event } from "./models/event.js";
 
 dotenv.config(); // This should be at the very top
 
+console.log("process.env.MONGO_URI", process.env.MONGO_URI);
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
