@@ -11,10 +11,19 @@ dotenv.config(); // This should be at the very top
 
 console.log("process.env.MONGO_URI", process.env.MONGO_URI);
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+console.log("Connecting to MongoDB...");
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 30000,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB successfully");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
